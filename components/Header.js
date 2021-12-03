@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { signIn } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import {
   HomeIcon,
   PlusIcon,
@@ -35,29 +36,44 @@ const menu = [
 ];
 
 const Header = () => {
+  const [session] = useSession();
+  const router = useRouter();
+
   return (
     <div className="flex items-center sticky bg-[#040714] top-0 z-[1000] h-[72px] px-10 md:px-12">
       <Image
         src="/images/logo.svg"
         width={80}
         height={80}
-        className="cursor-pointer"
+        className="cursor-pointer mb-1"
+        onClick={() => router.push('/')}
       />
-      <div className="hidden ml-10 md:flex items-center space-x-6">
-        {menu.map((item, index) => (
-          <a className="header-link group" key={index}>
-            {item.icon}
-            <span className="span">{item.name}</span>
-          </a>
-        ))}
-      </div>
+      {session && (
+        <div className="hidden ml-10 md:flex items-center space-x-6">
+          {menu.map((item, index) => (
+            <a className="header-link group" key={index}>
+              {item.icon}
+              <span className="span">{item.name}</span>
+            </a>
+          ))}
+        </div>
+      )}
 
-      <button
-        className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition-all duration-200"
-        onClick={signIn}
-      >
-        Login
-      </button>
+      {!session ? (
+        <button
+          className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition-all duration-200"
+          onClick={signIn}
+        >
+          Login
+        </button>
+      ) : (
+        <img
+          src={session.user.image}
+          alt=""
+          className="ml-auto h-12 w-12 rounded-full object-cover cursor-pointer"
+          onClick={signOut}
+        />
+      )}
     </div>
   );
 };
