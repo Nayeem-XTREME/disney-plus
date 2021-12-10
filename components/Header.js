@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { signIn, signOut, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import { signIn, signOut, useSession } from 'next-auth/client';
 import {
   HomeIcon,
   PlusIcon,
@@ -58,21 +58,20 @@ const Header = () => {
           ))}
         </div>
       )}
-
-      {!session ? (
-        <button
-          className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition-all duration-200"
-          onClick={signIn}
-        >
-          Login
-        </button>
-      ) : (
+      {session ? (
         <img
           src={session.user.image}
           alt=""
           className="ml-auto h-12 w-12 rounded-full object-cover cursor-pointer"
           onClick={signOut}
         />
+      ) : (
+        <button
+          className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition-all duration-200"
+          onClick={signIn}
+        >
+          Login
+        </button>
       )}
     </div>
   );
