@@ -56,18 +56,20 @@ const brands = [
 
 const Brands = () => {
   return (
-    <section className="flex flex-col md:flex-row justify-center items-center mt-10 px-8 gap-6 max-w-[1400px] mx-auto">
+    <section className="flex flex-col sm:flex-row flex-wrap justify-center items-center mx-auto max-w-[1400px] mt-10">
       {brands.map((brand, index) => (
-        <div className="brand group" key={index}>
-          <Image src={brand.image.src} layout="fill" objectFit="cover" />
-          <video
-            autoPlay
-            loop
-            playsInline
-            className="hidden group-hover:inline rounded-lg object-cover"
-          >
-            <source src={brand.video.src} type={brand.video.type} />
-          </video>
+        <div className="w-1/5 min-w-[224px]" key={index}>
+          <div className="brand group">
+            <Image src={brand.image.src} layout="fill" objectFit="cover" />
+            <video
+              autoPlay
+              loop
+              playsInline
+              className="hidden group-hover:inline rounded-lg object-cover"
+            >
+              <source src={brand.video.src} type={brand.video.type} />
+            </video>
+          </div>
         </div>
       ))}
     </section>
