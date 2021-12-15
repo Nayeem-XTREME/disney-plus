@@ -7,7 +7,11 @@ module.exports = {
   important: true,
   darkMode: 'media', // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: (theme) => ({
+        home: "url('/images/background.png')",
+      }),
+    },
     fontFamily: {
       body: ['Montserrat', 'sans-serif'],
     },
@@ -15,5 +19,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };

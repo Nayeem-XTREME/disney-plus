@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   body {
@@ -28,5 +28,12 @@
     border-[#f9f9f9] border-opacity-10 rounded-lg cursor-pointer 
     shadow-xl overflow-hidden hover:border-opacity-80 hover:shadow-2xl
     transform hover:scale-105 transition duration-300;
+  }
+
+  .thumbnail {
+    @apply flex min-w-[250px] h-[170px] md:min-w-[330px] md:h-[210px]
+    rounded-lg overflow-hidden shadow-xl cursor-pointer border-[3px] border-[#f9f9f9]
+    border-opacity-10 hover:border-opacity-80 hover:shadow-2xl transform hover:scale-105 
+    transition duration-300;
   }
 }
