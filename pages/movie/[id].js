@@ -8,7 +8,7 @@ import { Head, Header, Hero } from '../../components';
 import { tmdbBaseUrl, youtubePrefix } from '../../variables';
 
 const Movie = ({ session, result }) => {
-  const [showPlayer, setShowPlayer] = useState(false);
+  const [moviePlayer, setMoviePlayer] = useState(false);
 
   const videoIndex = result.videos?.results?.findIndex(
     (item) => item.type === 'Trailer'
@@ -60,7 +60,7 @@ const Movie = ({ session, result }) => {
                 className="text-xs md:text-base bg-black/30 text-[#f9f9f9] border 
                 border-[#f9f9f9] flex items-center justify-center py-2.5 px-6 rounded 
                 hover:bg-[#c6c6c6]"
-                onClick={() => setShowPlayer(true)}
+                onClick={() => setMoviePlayer(true)}
               >
                 <img
                   src="/images/play-icon-white.svg"
@@ -96,14 +96,14 @@ const Movie = ({ session, result }) => {
             <h4 className="text-sm md:text-lg max-w-4xl">{result.overview}</h4>
           </div>
 
-          {showPlayer && (
+          {moviePlayer && (
             <div className="absolute inset-0 bg-black/50 h-full w-full z-50" />
           )}
 
           <div
             className={`absolute top-3 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden
             transition duration-500 ${
-              showPlayer ? 'opacity-100 z-50' : 'opacity-0'
+              moviePlayer ? 'opacity-100 z-50' : 'opacity-0'
             }`}
           >
             <div
@@ -114,7 +114,7 @@ const Movie = ({ session, result }) => {
               <div
                 className="cursor-pointer w-8 h-8 flex items-center justify-center rounded-lg
                 opacity-50 hover:opacity-75 hover:bg-[#0f0f0f]"
-                onClick={() => setShowPlayer(false)}
+                onClick={() => setMoviePlayer(false)}
               >
                 <XIcon className="h-5" />
               </div>
@@ -127,7 +127,7 @@ const Movie = ({ session, result }) => {
                 width="100%"
                 height="100%"
                 controls={true}
-                playing={showPlayer}
+                playing={moviePlayer}
               />
             </div>
           </div>
