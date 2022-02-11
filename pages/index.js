@@ -20,7 +20,7 @@ const Home = ({
     <div className="">
       <Head title="Disney+" />
       <Header />
-      {!session ? (
+      {session ? (
         <Hero />
       ) : (
         <main
